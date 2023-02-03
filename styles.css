@@ -1,0 +1,23 @@
+h1 {
+  text-align: center;
+}
+.grid {
+  background-color: rgb(126, 67, 185);
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(3, 150px);
+  text-align: center;
+  justify-content: center;
+}
+
+.boxes {
+  font-size: 100px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxes:hover {
+  background-color: rgb(95, 44, 146);
+}
