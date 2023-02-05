@@ -16,6 +16,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 
 .boxes:hover {
@@ -25,10 +26,56 @@ h1 {
 .display {
   font-size: 36px;
   text-align: center;
+  padding-top: 20px;
 }
-
+.main-container {
+  position: relative;
+}
 .winner {
   font-size: 36px;
   text-align: center;
   color: red;
+  padding-top: 20px;
+}
+.restart {
+  position: fixed;
+  display: none;
+  font-size: 18px;
+  top: 300px;
+  right: 100px;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background-color: rgb(167, 115, 219);
+  border: 1px solid black;
+}
+
+.restart:hover {
+  background-color: rgb(155, 85, 224);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+  gap: 10px;
+  padding-top: 30px;
+}
+
+.popup {
+  border: 1px solid black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 500px;
+  min-height: 250px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(129, 95, 160, 1);
+  border-radius: 12px;
+}
+
+#submit-name {
+  margin-top: 16px;
+  font-size: 14px;
+  padding: 7px 18px;
 }
