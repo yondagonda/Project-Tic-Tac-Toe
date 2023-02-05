@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-unreachable-loop */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-plusplus */
 const Gameboard = (() => {
@@ -13,17 +16,17 @@ function setPlayerNames() {
   const player2INput = document.getElementById("player2").value;
   console.log(player1INput);
   console.log(player2INput);
-  // eslint-disable-next-line no-undef
   player1 = Player(player1INput, "X");
-  // eslint-disable-next-line no-undef
   player2 = Player(player2INput, "O");
   document
     .querySelectorAll(".boxes")
     .forEach((x) => (x.style.pointerEvents = "auto"));
 }
 
-function hidePopup() {
+function hideShow() {
   document.querySelector(".popup").style.display = "none";
+  document.querySelector(".header").style.display = "none";
+  document.querySelector(".grid").style.display = "grid";
 }
 
 const Game = (() => {
@@ -107,7 +110,7 @@ const Game = (() => {
       if (target == element.id && e.target.innerText === "") {
         switchPlayer();
         switchPlayer();
-        display.innerHTML = `now ${currentPlayer.name}'s turn`;
+        display.innerHTML = `Your turn, ${currentPlayer.name}`;
         switchPlayer();
         element.innerText = currentPlayer.marker;
         Gameboard.gameboard[target - 1] = currentPlayer.marker;
