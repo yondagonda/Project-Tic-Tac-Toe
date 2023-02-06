@@ -9,13 +9,11 @@ const Gameboard = (() => {
   return { gameboard, grid };
 })();
 
-const Player = (name, marker) => ({ name, marker }); // player factory function
+const Player = (name, marker) => ({ name, marker });
 
 function setPlayerNames() {
   const player1INput = document.getElementById("player1").value;
   const player2INput = document.getElementById("player2").value;
-  console.log(player1INput);
-  console.log(player2INput);
   player1 = Player(player1INput, "X");
   player2 = Player(player2INput, "O");
   document
@@ -32,10 +30,9 @@ function hideShow() {
 
 const Game = (() => {
   const submit = document.getElementById("submit-name");
-  submit.addEventListener("click", setPlayerNames());
-
-  let currentPlayer = player1;
   const winDisplay = document.querySelector(".winner");
+  submit.addEventListener("click", setPlayerNames());
+  let currentPlayer = player1;
   let anID = 0;
   let count = 0;
 
@@ -57,13 +54,11 @@ const Game = (() => {
 
   function clearArrary() {
     Gameboard.gameboard.splice(0, 9, "", "", "", "", "", "", "", "", "");
-    console.log(Gameboard.gameboard);
   }
 
   function endGame() {
-    document
-      .querySelectorAll(".boxes")
-      .forEach((x) => (x.style.pointerEvents = "none"));
+    const boxes = document.querySelectorAll(".boxes");
+    boxes.forEach((x) => (x.style.pointerEvents = "none"));
     document.querySelector(".display").style.display = "none";
 
     const restart = document.querySelector(".restart");
@@ -77,13 +72,11 @@ const Game = (() => {
     playAgain.addEventListener("click", () => {
       clearArrary();
       count = 0;
-      document.querySelector(".display").innerHTML = "";
+      document.querySelector(".display").style.display = "block";
+      document.querySelector(".display").innerHTML = "Game Starts!";
       winDisplay.innerHTML = "";
-      const boxes = document.querySelectorAll(".boxes");
       boxes.forEach((box) => {
-        document
-          .querySelectorAll(".boxes")
-          .forEach((x) => (x.style.pointerEvents = "auto"));
+        box.style.pointerEvents = "auto";
         box.innerHTML = "";
       });
     });
@@ -95,6 +88,7 @@ const Game = (() => {
       endGame();
     }
   }
+
   function checkWin(marker) {
     function Win(x, y, z) {
       return (
@@ -120,19 +114,17 @@ const Game = (() => {
 
   Gameboard.gameboard.forEach((box) => {
     const element = document.createElement("div");
+    const display = document.querySelector(".display");
     element.className = "boxes";
     element.id = ID();
-
     element.innerText = box;
     Gameboard.grid.appendChild(element);
-    const display = document.querySelector(".display");
 
     element.addEventListener("click", (e) => {
       const target = +e.target.id;
       if (target == element.id && e.target.innerText === "") {
         switchPlayer();
         switchPlayer();
-        document.querySelector(".display").style.display = "block";
         display.innerHTML = `Your turn, ${currentPlayer.name}`;
         switchPlayer();
         element.innerText = currentPlayer.marker;

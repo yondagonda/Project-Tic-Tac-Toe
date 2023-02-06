@@ -3,9 +3,11 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   background-color: rgb(243, 241, 245);
 }
+
 .header {
   text-align: center;
   margin-top: 100px;
@@ -13,19 +15,26 @@ body {
   font-family: "Itim", cursive;
   min-width: 415px;
 }
+
 .form-header {
   padding-bottom: 14px;
   font-family: "Itim", cursive;
   font-size: 38px;
 }
+
+.gameButtons {
+  margin: 0 auto;
+  display: flex;
+  width: 270px;
+}
+
 .grid {
   display: none;
   grid-template-columns: repeat(3, 150px);
   grid-template-rows: repeat(3, 150px);
   text-align: center;
   justify-content: center;
-  padding-top: 240px;
-  padding-bottom: 100px;
+  padding: 240px 0px 100px 0px;
   min-width: 450px;
 }
 
@@ -39,9 +48,11 @@ body {
   align-items: center;
   pointer-events: none;
 }
+
 .boxes:nth-child(-n + 3) {
   border-top: 0;
 }
+
 .boxes:nth-child(3n) {
   border-right: 0;
 }
@@ -56,16 +67,15 @@ body {
   font-family: "Itim", cursive;
   min-width: 450px;
 }
-.main-container {
-  position: relative;
-}
+
 .winner {
   font-size: 40px;
   text-align: center;
   color: rgb(83, 182, 159);
   font-family: "Itim", cursive;
-  padding-bottom: 24px;
+  padding-bottom: 30px;
 }
+
 .restart,
 .play-again {
   margin: 0 auto;
@@ -79,7 +89,8 @@ body {
   margin-bottom: 10px;
 }
 
-.restart:hover {
+.restart:hover,
+.play-again:hover {
   background-color: rgb(228, 225, 225);
 }
 
@@ -92,6 +103,7 @@ form {
   padding-top: 30px;
   min-width: 415px;
 }
+
 input {
   font-size: 26px;
   padding: 10px 20px;
@@ -100,6 +112,7 @@ input {
   border: 0;
   margin-bottom: 10px;
 }
+
 .popup {
   border: 0;
   position: fixed;
@@ -115,7 +128,6 @@ input {
 #submit-name {
   margin-top: 10px;
   font-size: 14px;
-  padding: 7px 18px;
   border: 0;
   background-color: rgb(116, 218, 195);
   padding: 18px 40px;
