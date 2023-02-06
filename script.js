@@ -27,6 +27,7 @@ function hideShow() {
   document.querySelector(".popup").style.display = "none";
   document.querySelector(".header").style.display = "none";
   document.querySelector(".grid").style.display = "grid";
+  document.querySelector(".display").innerHTML = "Game Starts!";
 }
 
 const Game = (() => {
@@ -54,6 +55,11 @@ const Game = (() => {
     return currentPlayer;
   }
 
+  function clearArrary() {
+    Gameboard.gameboard.splice(0, 9, "", "", "", "", "", "", "", "", "");
+    console.log(Gameboard.gameboard);
+  }
+
   function endGame() {
     document
       .querySelectorAll(".boxes")
@@ -64,6 +70,22 @@ const Game = (() => {
     restart.style.display = "block";
     restart.addEventListener("click", () => {
       location.reload();
+    });
+
+    const playAgain = document.querySelector(".play-again");
+    playAgain.style.display = "block";
+    playAgain.addEventListener("click", () => {
+      clearArrary();
+      count = 0;
+      document.querySelector(".display").innerHTML = "";
+      winDisplay.innerHTML = "";
+      const boxes = document.querySelectorAll(".boxes");
+      boxes.forEach((box) => {
+        document
+          .querySelectorAll(".boxes")
+          .forEach((x) => (x.style.pointerEvents = "auto"));
+        box.innerHTML = "";
+      });
     });
   }
 
@@ -110,6 +132,7 @@ const Game = (() => {
       if (target == element.id && e.target.innerText === "") {
         switchPlayer();
         switchPlayer();
+        document.querySelector(".display").style.display = "block";
         display.innerHTML = `Your turn, ${currentPlayer.name}`;
         switchPlayer();
         element.innerText = currentPlayer.marker;
