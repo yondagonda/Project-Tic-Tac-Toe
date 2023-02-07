@@ -4,34 +4,17 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-plusplus */
 const Gameboard = (() => {
-  const gameboard = ["", "", "", "", "", "", "", "", ""];
-  const grid = document.querySelector(".grid");
+  const gameboard = ['', '', '', '', '', '', '', '', ''];
+  const grid = document.querySelector('.grid');
   return { gameboard, grid };
 })();
 
 const Player = (name, marker) => ({ name, marker });
 
-function setPlayerNames() {
-  const player1INput = document.getElementById("player1").value;
-  const player2INput = document.getElementById("player2").value;
-  player1 = Player(player1INput, "X");
-  player2 = Player(player2INput, "O");
-  document
-    .querySelectorAll(".boxes")
-    .forEach((x) => (x.style.pointerEvents = "auto"));
-}
-
-function hideShow() {
-  document.querySelector(".popup").style.display = "none";
-  document.querySelector(".header").style.display = "none";
-  document.querySelector(".grid").style.display = "grid";
-  document.querySelector(".display").innerHTML = "Game Starts!";
-}
-
 const Game = (() => {
-  const submit = document.getElementById("submit-name");
-  const winDisplay = document.querySelector(".winner");
-  submit.addEventListener("click", setPlayerNames());
+  const submit = document.getElementById('submit-name');
+  const winDisplay = document.querySelector('.winner');
+  submit.addEventListener('click', setPlayerNames());
   let currentPlayer = player1;
   let anID = 0;
   let count = 0;
@@ -41,6 +24,23 @@ const Game = (() => {
       anID = ++anID;
       return anID;
     }
+  }
+
+  function hideShow() {
+    document.querySelector('.popup').style.display = 'none';
+    document.querySelector('.header').style.display = 'none';
+    document.querySelector('.grid').style.display = 'grid';
+    document.querySelector('.display').innerHTML = 'Game Starts!';
+  }
+
+  function setPlayerNames() {
+    const player1INput = document.getElementById('player1').value;
+    const player2INput = document.getElementById('player2').value;
+    player1 = Player(player1INput, 'X');
+    player2 = Player(player2INput, 'O');
+    document
+      .querySelectorAll('.boxes')
+      .forEach((x) => (x.style.pointerEvents = 'auto'));
   }
 
   function switchPlayer() {
@@ -53,31 +53,31 @@ const Game = (() => {
   }
 
   function clearArrary() {
-    Gameboard.gameboard.splice(0, 9, "", "", "", "", "", "", "", "", "");
+    Gameboard.gameboard.splice(0, 9, '', '', '', '', '', '', '', '', '');
   }
 
   function endGame() {
-    const boxes = document.querySelectorAll(".boxes");
-    boxes.forEach((x) => (x.style.pointerEvents = "none"));
-    document.querySelector(".display").style.display = "none";
+    const boxes = document.querySelectorAll('.boxes');
+    boxes.forEach((x) => (x.style.pointerEvents = 'none'));
+    document.querySelector('.display').style.display = 'none';
 
-    const restart = document.querySelector(".restart");
-    restart.style.display = "block";
-    restart.addEventListener("click", () => {
+    const restart = document.querySelector('.restart');
+    restart.style.display = 'block';
+    restart.addEventListener('click', () => {
       location.reload();
     });
 
-    const playAgain = document.querySelector(".play-again");
-    playAgain.style.display = "block";
-    playAgain.addEventListener("click", () => {
+    const playAgain = document.querySelector('.play-again');
+    playAgain.style.display = 'block';
+    playAgain.addEventListener('click', () => {
       clearArrary();
       count = 0;
-      document.querySelector(".display").style.display = "block";
-      document.querySelector(".display").innerHTML = "Game Starts!";
-      winDisplay.innerHTML = "";
+      document.querySelector('.display').style.display = 'block';
+      document.querySelector('.display').innerHTML = 'Game Starts!';
+      winDisplay.innerHTML = '';
       boxes.forEach((box) => {
-        box.style.pointerEvents = "auto";
-        box.innerHTML = "";
+        box.style.pointerEvents = 'auto';
+        box.innerHTML = '';
       });
     });
   }
@@ -90,7 +90,7 @@ const Game = (() => {
   }
 
   function checkWin(marker) {
-    function Win(x, y, z) {
+    function checkPosition(x, y, z) {
       return (
         Gameboard.gameboard[x] === marker &&
         Gameboard.gameboard[y] === marker &&
@@ -98,14 +98,14 @@ const Game = (() => {
       ); // this func will return true, only if x,y,z is equal to the currentplayers marker
     }
     if (
-      Win(0, 1, 2) ||
-      Win(3, 4, 5) ||
-      Win(6, 7, 8) ||
-      Win(0, 3, 6) ||
-      Win(1, 4, 7) ||
-      Win(2, 5, 8) ||
-      Win(0, 4, 8) ||
-      Win(2, 4, 6)
+      checkPosition(0, 1, 2) ||
+      checkPosition(3, 4, 5) ||
+      checkPosition(6, 7, 8) ||
+      checkPosition(0, 3, 6) ||
+      checkPosition(1, 4, 7) ||
+      checkPosition(2, 5, 8) ||
+      checkPosition(0, 4, 8) ||
+      checkPosition(2, 4, 6)
     ) {
       winDisplay.innerHTML = `${currentPlayer.name.toUpperCase()} IS THE WINNER!`;
       endGame();
@@ -113,16 +113,16 @@ const Game = (() => {
   }
 
   Gameboard.gameboard.forEach((box) => {
-    const element = document.createElement("div");
-    const display = document.querySelector(".display");
-    element.className = "boxes";
+    const element = document.createElement('div');
+    const display = document.querySelector('.display');
+    element.className = 'boxes';
     element.id = ID();
     element.innerText = box;
     Gameboard.grid.appendChild(element);
 
-    element.addEventListener("click", (e) => {
+    element.addEventListener('click', (e) => {
       const target = +e.target.id;
-      if (target == element.id && e.target.innerText === "") {
+      if (target == element.id && e.target.innerText === '') {
         switchPlayer();
         switchPlayer();
         display.innerHTML = `Your turn, ${currentPlayer.name}`;
@@ -131,11 +131,12 @@ const Game = (() => {
         Gameboard.gameboard[target - 1] = currentPlayer.marker;
         count++;
         checkTie();
-        checkWin("X");
-        checkWin("O");
+        checkWin('X');
+        checkWin('O');
       }
       console.log(Gameboard.gameboard);
     });
     return { element };
   });
+  return { hideShow, setPlayerNames };
 })();
